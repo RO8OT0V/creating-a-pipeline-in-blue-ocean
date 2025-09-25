@@ -4,6 +4,7 @@ pipeline {
       image 'node:18-alpine'
       args '-p 3000:3000'
     }
+
   }
   stages {
     stage('Build') {
@@ -11,11 +12,13 @@ pipeline {
         sh 'npm install'
       }
     }
+
     stage('Test') {
       steps {
         sh 'npm test'
       }
     }
+
     stage('Deliver') {
       steps {
         sh './jenkins/scripts/deliver.sh'
@@ -23,5 +26,6 @@ pipeline {
         sh './jenkins/scripts/kill.sh'
       }
     }
+
   }
 }
