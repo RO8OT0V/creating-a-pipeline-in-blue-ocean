@@ -1,10 +1,9 @@
 pipeline {
   agent {
     docker {
-      image 'node:6-alpine'
+      image 'node:18-alpine'
       args '-p 3000:3000'
     }
-
   }
   stages {
     stage('Build') {
@@ -13,11 +12,8 @@ pipeline {
       }
     }
     stage('Test') {
-      environment {
-        CI = 'true'
-      }
       steps {
-        sh './jenkins/scripts/test.sh'
+        sh 'npm test'
       }
     }
     stage('Deliver') {
